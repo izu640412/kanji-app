@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+
 # data.py から KANJI_LIST を読み込む
 try:
     from data import KANJI_LIST
@@ -80,7 +81,7 @@ def quiz_engine(data_list):
                 st.rerun()
     else:
         if st.session_state.last_choice == q_item['read']:
-            st.success(f"⭕ 正解！")
+            st.success("⭕ 正解！")
             if 'last_q_rec' not in st.session_state or st.session_state.last_q_rec != q_idx:
                 st.session_state.score += 1
                 st.session_state.last_q_rec = q_idx
@@ -93,7 +94,8 @@ def quiz_engine(data_list):
         if st.button("次の問題へ 👉", type="primary", use_container_width=True):
             st.session_state.current_question += 1
             st.session_state.answered = False
-            if 'last_q_rec' in st.session_state: del st.session_state.last_q_rec
+            if 'last_q_rec' in st.session_state:
+                del st.session_state.last_q_rec
             st.rerun()
 
 # --- 4. 画面切り替え ---
@@ -113,7 +115,7 @@ elif menu == "✍️ テスト開始":
         st.session_state.current_question = 0
         st.session_state.score = 0
         st.session_state.answered = False
-        st.session_state.mode = "test"
+        st.mode = "test"
         random.shuffle(st.session_state.all_kanji_data)
     quiz_engine(st.session_state.all_kanji_data)
 
@@ -123,6 +125,6 @@ elif menu == "🔥 復習モード":
         st.session_state.current_question = 0
         st.session_state.score = 0
         st.session_state.answered = False
-        st.session_state.mode = "review"
+        st.mode = "review"
         random.shuffle(st.session_state.wrong_list)
     quiz_engine(st.session_state.wrong_list)
