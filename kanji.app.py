@@ -1,4 +1,15 @@
 import streamlit as st
+
+# ---- ここから追加するコード ----
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+# ---- ここまで追加するコード ----
 import random
 
 # data.py から KANJI_LIST を読み込む
